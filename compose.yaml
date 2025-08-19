@@ -3,7 +3,6 @@ services:
     image: cloudflare/cloudflared:latest
     container_name: CloudflareTunnel
     restart: unless-stopped
-    hostname: cloudflaretunnel
     networks:
       - CloudflareTunnel
     command: tunnel run
