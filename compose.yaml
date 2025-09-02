@@ -1,3 +1,4 @@
+name: CloudflareTunnel
 services:
   CloudflareTunnel:
     image: cloudflare/cloudflared:latest
