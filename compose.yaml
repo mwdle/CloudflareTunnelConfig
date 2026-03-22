@@ -1,7 +1,7 @@
 name: CloudflareTunnel
 services:
   CloudflareTunnel:
-    image: cloudflare/cloudflared:latest
+    image: cloudflare/cloudflared:2026.3.0
     container_name: CloudflareTunnel
     restart: unless-stopped
     networks:
