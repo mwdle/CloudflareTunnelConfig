@@ -18,10 +18,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: 128M
+          cpus: 1
+          memory: 256M
+          pids: 30
         reservations:
-          cpus: "0.05"
+          cpus: 0.05
           memory: 32M
 
 # Assumes you have already created a Docker Network called 'CloudflareTunnel' (ex 'docker network create CloudflareTunnel'). See the README for more information.
