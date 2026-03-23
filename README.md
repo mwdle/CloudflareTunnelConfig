@@ -17,13 +17,8 @@ A sample Docker Compose file and brief guide for Cloudflare Zero Trust Tunnels.
    git clone https://github.com/mwdle/CloudflareTunnelConfig.git
    ```
 
-2. Create a file called `.env` in the same directory as `docker-compose.yml` containing the following property:
-
-   ```properties
-   TUNNEL_TOKEN=<YOUR_CLOUDFLARE_TUNNEL_TOKEN>
-   ```
-
-3. Open a terminal in the directory containing the docker-compose file.
+2. Copy `.env.example` to `.env` and configure the properties for your environment.
+3. Open a terminal in the directory containing the compose file.
 4. Create a docker network for the container:
 
    ```shell
