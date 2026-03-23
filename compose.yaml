@@ -3,19 +3,31 @@ services:
   CloudflareTunnel:
     image: cloudflare/cloudflared:2026.3.0@sha256:6b599ca3e974349ead3286d178da61d291961182ec3fe9c505e1dd02c8ac31b0
     container_name: CloudflareTunnel
-    user: "${UID}:${GID}"
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
-    read_only: true
     restart: unless-stopped
-    networks:
-      - CloudflareTunnel
+
     command: tunnel --no-autoupdate run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
       - TUNNEL_METRICS=0.0.0.0:60123
+    networks:
+      - CloudflareTunnel
+
+    user: "${UID}:${GID}"
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+    logging:
+      driver: "journald"
+    healthcheck:
+      test: ["CMD", "cloudflared", "tunnel", "ready"]
+      interval: 1m
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
     deploy:
       resources:
         limits:
@@ -25,12 +37,6 @@ services:
         reservations:
           cpus: 0.05
           memory: 32M
-    healthcheck:
-      test: ["CMD", "cloudflared", "tunnel", "ready"]
-      interval: 1m
-      timeout: 5s
-      retries: 3
-      start_period: 30s
 
 # Assumes you have already created a Docker Network called 'CloudflareTunnel' (ex 'docker network create CloudflareTunnel'). See the README for more information.
 networks:
