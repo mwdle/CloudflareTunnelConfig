@@ -19,7 +19,7 @@ services:
       - ALL
 
     logging:
-      driver: "journald"
+      driver: journald
     healthcheck:
       test: ["CMD", "cloudflared", "tunnel", "ready"]
       interval: 1m
