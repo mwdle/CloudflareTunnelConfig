@@ -19,10 +19,10 @@ DropCapability=all
 
 Exec=tunnel --no-autoupdate run --token-file /run/secrets/tunnel_token
 
-HealthStartupCmd=cloudflared tunnel ready
+HealthStartupCmd=["cloudflared", "tunnel", "ready"]
 HealthStartupInterval=5s
 HealthStartupTimeout=5s
-HealthCmd=cloudflared tunnel ready
+HealthCmd=["cloudflared", "tunnel", "ready"]
 HealthInterval=30s
 HealthTimeout=5s
 HealthOnFailure=kill
