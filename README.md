@@ -1,53 +1,17 @@
-# Cloudflare Tunnel Docker Compose Configuration
+# Cloudflare Tunnel Configuration
 
-A sample Docker Compose file and brief guide for Cloudflare Zero Trust Tunnels.
+This repository runs Cloudflare Tunnel as a rootless Podman Quadlet. It shares
+`cloudflare-tunnel.network` with Caddy and forwards remotely managed tunnel
+routes to Caddy through the existing `https://Caddy` origin.
 
-## Table of Contents
+## Podman secret
 
-- [Description](#cloudflare-tunnel-docker-compose-configuration)
-- [Getting Started](#getting-started)
-- [License](#license)
-- [Disclaimer](#disclaimer)
+Create the tunnel token as the rootless Quadlet user:
 
-## Getting Started
-
-1. Clone the repository:
-
-   ```shell
-   git clone https://github.com/mwdle/CloudflareTunnelConfig.git
-   ```
-
-2. Copy `.env.example` to `.env` and configure the properties for your environment.
-3. Open a terminal in the directory containing the compose file.
-4. Create a docker network for the container:
-
-   ```shell
-   docker network create CloudflareTunnel
-   ```
-
-5. Start the container:
-
-   ```shell
-   docker compose up -d
-   ```
-
-6. Attach other containers to the CloudflareTunnel network you created earlier by executing the following:
-
-   ```shell
-   docker network connect CloudflareTunnel <CONTAINER_NAME>
-   ```
-
-7. Configure a tunnel with a service URL that is the name of the container you want to tunnel:  
-   ![Cloudflare Dashboard Tunnel configuration](images/TunnelConfiguration.png)
-8. If using a reverse proxy, simply use the name of your reverse proxy container, add the Origin Server Name, HTTP Host Header and HTTP/2 like in the following example:  
-   ![Cloudflare Dashboard Tunnel configuration for reverse proxy](images/TunnelConfigurationReverseProxy.png)
-
-Your container should be up and running and your tunnels should be accessible according to your configuration. Attach your reverse proxy container to the previously created Docker Network and configure it accordingly.
+```console
+podman secret create cloudflare_tunnel_token -
+```
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Disclaimer
-
-This repository is provided as-is and is intended for informational and reference purposes only. The author assumes no responsibility for any errors or omissions in the content or for any consequences that may arise from the use of the information provided. Always exercise caution and seek professional advice if necessary.
