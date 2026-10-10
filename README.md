@@ -1,8 +1,6 @@
 # Cloudflare Tunnel Configuration
 
-This repository runs Cloudflare Tunnel as a rootless Podman Quadlet. It shares
-`cloudflare-tunnel.network` with Caddy and forwards remotely managed tunnel
-routes to Caddy through the existing `https://Caddy` origin.
+A rootless Podman Quadlet configuration for `cloudflared`
 
 ## Podman secret
 
@@ -14,4 +12,4 @@ podman secret create cloudflare_tunnel_token -
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details
